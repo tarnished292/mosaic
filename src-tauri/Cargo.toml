@@ -25,4 +25,5 @@ serde_json = "1"
 syncify = { path = "../../syncify" }
 tauri-plugin-dialog = "2.7.2"
 tauri-plugin-store = "2.4.4"
+lyrics-acquisition-engine = "0.1.0"
 
