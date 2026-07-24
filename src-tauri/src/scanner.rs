@@ -1,6 +1,7 @@
-use lyrics_acquisition_engine::get_metadata;
 use serde::Serialize;
 use std::{fs, path::PathBuf};
+
+use crate::metadata::get_metadata;
 
 #[derive(Serialize, Clone)]
 pub struct Song {
@@ -30,8 +31,9 @@ pub fn scan_dir(dir: PathBuf) -> Result<Vec<Song>, String> {
 
         if let Some(extension) = path.extension().and_then(|e| e.to_str()) {
             if EXT.contains(&extension) {
-                if let Some(metadata) = get_metadata(&path) {
-                    songs.push(metadata);
+                match get_metadata(&path) {
+                    Ok(metadata) => songs.push(metadata),
+                    Err(e) => eprintln!("Skipping {:?}: {}", path, e),
                 }
             }
         }
@@ -39,4 +41,3 @@ pub fn scan_dir(dir: PathBuf) -> Result<Vec<Song>, String> {
 
     Ok(songs)
 }
-

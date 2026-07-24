@@ -18,12 +18,14 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
-tauri = { version = "2", features = [] }
+tauri = { version = "2", features = ["protocol-asset"] }
 tauri-plugin-opener = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 syncify = { path = "../../syncify" }
 tauri-plugin-dialog = "2.7.2"
 tauri-plugin-store = "2.4.4"
-lyrics-acquisition-engine = "0.1.0"
+id3 = "1.17.0"
+lofty = "0.24.0"
+base64 = "0.23.0"
 

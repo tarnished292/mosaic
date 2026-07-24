@@ -1,29 +1,9 @@
 import { useEffect, useState } from "react";
-import { open } from "@tauri-apps/plugin-dialog";
 import { load } from "@tauri-apps/plugin-store";
-import { FolderClosed, FolderOpen } from "lucide-react";
+import {FolderOpen} from "lucide-react";
+import { chose_dir } from "../utils/chosePath";
 
 export default function SelectDir({ onSelected }) {
-  const [libPath, setLibPath] = useState(null);
-
-  useEffect(() => {
-    (async () => {
-      const store = await load("settings.json", { autoSave: true });
-      const saved = await store.get("libraryPath");
-      if (saved) setLibPath(saved);
-    })();
-  }, []);
-
-  const chose_dir = async () => {
-    const selected = await open({ multiple: false, directory: true });
-    if (selected) {
-      const store = await load("settings.json", { autoSave: true });
-      await store.set("libraryPath", selected);
-      setLibPath(selected);
-      onSelected?.();
-    }
-  };
-
   return (
     <div className="min-h-screen bg-[#1F1F23] flex flex-col justify-center">
       <div className="flex justify-center mb-7">
